@@ -1,0 +1,20 @@
+/* App.css */
+/* src/index.css or src/App.css */
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+.App {
+    text-align: center;
+  }
+  
+  .navbar {
+    position: fixed; /* Ensure navbar is fixed at the top */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    z-index: 1000; /* Ensure navbar is on top of other content */
+  }
+  
