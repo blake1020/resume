@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import DropDown from "./DropDown";
 // //import temp book covers
 // import lightningThiefCover from '../src/app/assets/images/percy-jackson-lightning.jpg'
 // import seaOfMonsters from '../src/app/assest/images/percy-jackson-sea-of-monsters.jpg'
@@ -62,14 +62,18 @@ const ratings = ["Fantastic", "Great", "Okay", "Bad", "Terrible"];
 
 function BookReviewPage() {
   const [selectedBook, setSelectedBook] = useState("");
-  const [reviews, setReviews] = useState([]);
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
   const [username, setUsername] = useState("");
   const [userRating, setUserRating] = useState("Fantastic");
+  const [isShown, setIsShown] = useState(false);
+  //NEED TO FIGURE OUT WHICH I NEED TO KEEP OR GET RID OF
+  const [reviews, setReviews] = useState([]);
   const [reviewContent, setReviewContent] = useState("");
 
-  // Simulate fetching book list data
+  // Simulate fetching book list data -CONVERT TO DATA BASE
   const bookList = [
     { id: "1", title: "The Lightning Thief" },
     { id: "2", title: "The Sea of Monsters" },
@@ -99,18 +103,16 @@ function BookReviewPage() {
     setSelectedBook(event.target.value);
   };
 
+  //handles sumbiting review
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
   };
-
   const handleRatingChange = (event) => {
     setUserRating(event.target.value);
   };
-
   const handleReviewContentChange = (event) => {
     setReviewContent(event.target.value);
   };
-
   const handleSubmitReview = () => {
     if (username && reviewContent) {
       const newReview = {
@@ -133,12 +135,26 @@ function BookReviewPage() {
   if (!selectedBook) {
     return (
       <div>
-        <h1>Book Reviews</h1>
-        <label htmlFor="bookSelect">Select a Book: </label>
+        //add dropdown component
+        <DropDown
+          bookList={bookList}
+          selectedBook={selectedBook}
+          onBookChange={handleBookChange}
+        />
+        {/* <div style={{marginTop: "50px"}}> */}
+        {!selectedBook ? (
+          <div>
+            <h1>Book Reviews</h1>
+          </div>
+        ) : (
+          <div>select a book to review</div>
+        )}
+        {/*<label htmlFor="bookSelect">Select a Book: </label>
         <select
           id="bookSelect"
           value={selectedBook}
           onChange={handleBookChange}
+
         >
           <option value="">Select a book</option>
           {bookList.map((book) => (
@@ -146,7 +162,7 @@ function BookReviewPage() {
               {book.title}
             </option>
           ))}
-        </select>
+        </select> */}
       </div>
     );
   }
@@ -156,59 +172,82 @@ function BookReviewPage() {
 
   return (
     <div>
-      <h1>Reviews for {bookTitles[selectedBook]}</h1>
-      <img
-        src={selectedBookDetails.cover}
-        alt={`Cover of ${selectedBookDetails.title}`}
-        style={{ width: "200px", height: "auto" }}
+      {/* Dropdown component */}
+      <DropDown
+        bookList={bookList}
+        selectedBook={selectedBook}
+        onBookChange={handleBookChange}
       />
-
-      <div>
-        <label htmlFor="username">Enter your name: </label>
-        <input
-          type="text"
-          id="username"
-          value={username}
-          onChange={handleUsernameChange}
-          placeholder="Your name"
-        />
+      <div style={{ marginTop: "60px" }}>
+        {" "}
+        {/* Adjust margin to ensure dropdown doesn't overlap */}
+        {!selectedBook ? (
+          <div>
+            <h1>Book Reviews</h1>
+          </div>
+        ) : (
+          <>
+            <h1>Reviews for {bookTitles[selectedBook]}</h1>
+            {selectedBookDetails && (
+              <img
+                src={selectedBookDetails.cover}
+                alt={`Cover of ${selectedBookDetails.title}`}
+                style={{ width: "200px", height: "auto" }}
+              />
+            )}
+            <div>
+              <label htmlFor="username">Enter your name: </label>
+              <input
+                type="text"
+                id="username"
+                value={username}
+                onChange={handleUsernameChange}
+                placeholder="Your name"
+              />
+            </div>
+            <div>
+              <label htmlFor="rating">Rating: </label>
+              <select
+                id="rating"
+                value={userRating}
+                onChange={handleRatingChange}
+              >
+                {ratings.map((rating) => (
+                  <option key={rating} value={rating}>
+                    {rating}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="reviewContent">Your Review: </label>
+              <textarea
+                id="reviewContent"
+                value={reviewContent}
+                onChange={handleReviewContentChange}
+                placeholder="Write your review here"
+              />
+            </div>
+            <button onClick={handleSubmitReview}>Submit Review</button>
+            <h2>Book Reviews</h2>
+            {reviews.length > 0 ? (
+              <ul>
+                {reviews.map((review, index) => (
+                  <li key={index}>
+                    <strong>Reviewer: {review.reviewerName}</strong>
+                    <br />
+                    <strong>Rating: {review.rating}</strong>
+                    <br />
+                    <p>{review.content}</p>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>No reviews available for this book.</p>
+            )}
+          </>
+        )}
       </div>
-      <div>
-        <label htmlFor="rating">Rating: </label>
-        <select id="rating" value={userRating} onChange={handleRatingChange}>
-          {ratings.map((rating) => (
-            <option key={rating} value={rating}>
-              {rating}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div>
-        <label htmlFor="reviewContent">Your Review: </label>
-        <textarea
-          id="reviewContent"
-          value={reviewContent}
-          onChange={handleReviewContentChange}
-          placeholder="Write your review here"
-        />
-      </div>
-      <button onClick={handleSubmitReview}>Submit Review</button>
-      <h2>Book Reviews</h2>
-      {reviews.length > 0 ? (
-        <ul>
-          {reviews.map((review, index) => (
-            <li key={index}>
-              <strong>Reviewer: {review.reviewerName}</strong>
-              <br />
-              <strong>Rating: {review.rating}</strong>
-              <br />
-              <p>{review.content}</p>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No reviews available for this book.</p>
-      )}
     </div>
   );
 }

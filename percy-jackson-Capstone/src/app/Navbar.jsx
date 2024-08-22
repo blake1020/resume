@@ -26,19 +26,6 @@ function Navbar({ selectedBook, onBookChange }) {
         <Link to="/mythicalCreatures" className="navbar-link">
           Mythical Creatures
         </Link>
-
-        <div className="dropdown-container">
-          <label htmlFor="bookSelect">Select a Book: </label>
-          <select id="bookSelect" value={selectedBook} onChange={onBookChange}>
-            <optgroup label="Select A Book">
-              {bookList.map((book) => (
-                <option key={book.id} value={book.title}>
-                  {book.title}
-                </option>
-              ))}
-            </optgroup>
-          </select>
-        </div>
       </div>
     </nav>
   );
