@@ -1,27 +1,31 @@
-import React, {useState, useEffect} from 'react'
-import '../css/CharacterCard.css'
+import React, { useState } from "react";
+import "../css/CharacterCard.css";
 
-
-const CharacterCard = ({character}) => {
-  const [flipped, setFlipped] = useState(false)
+const CharacterCard = ({ characters }) => {
+  const [flipped, setFlipped] = useState(false);
 
   const handleClick = () => {
-    setFlipped(!flipped)
-  }
+    setFlipped(!flipped);
+  };
 
   return (
-    <div className={`card ${flipped ? 'flipped' : ''}`} onClick={handleClick}>
-      <div className='card-inner'>
-        <div className='card-front'>
-          <h3>{character.name}</h3>
+    <div className={`card ${flipped ? "flipped" : ""}`} onClick={handleClick}>
+      <div className="card-inner">
+        <div className="card-front">
+          <h3>{characters.name}</h3>
         </div>
-        <div className='card-back'>
-          <p><strong>Godly Parent:</strong> {character.godlyParent.join(',')}</p>
-          <p><strong>Series Appeared In:</strong> {character.seriesAppearedIn.join('')}</p>
+        <div className="card-back">
+          <p>
+            <strong>Godly Parent:</strong> {characters.godlyParent.join(",")}
+          </p>
+          <p>
+            <strong>Series Appeared In:</strong>{" "}
+            {characters.seriesAppearedIn.join("")}
+          </p>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CharacterCard
+export default CharacterCard;

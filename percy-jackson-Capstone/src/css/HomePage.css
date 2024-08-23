@@ -8,8 +8,8 @@
   }
   
   .book {
-    width: 200px;
-    height: 250px;
+    width: 350px;
+    height: 400px;
     position: relative;
     perspective: 1000px;
     margin: 10px; /* Add margin to ensure proper spacing between books */

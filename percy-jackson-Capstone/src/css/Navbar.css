@@ -3,14 +3,14 @@
 .navbar {
     background-color: green; /* Green background for the navbar */
     width: 100%; /* Ensure the navbar spans the full width of the page */
-    padding: 10px 20px; /* Padding around the navbar items */
+    /* padding: 10px 20px; Padding around the navbar items */
   }
   
   .navbar-container {
     display: flex; /* Use Flexbox for layout */
     justify-content: space-around; /* Evenly space the items across the navbar */
     align-items: center; /* Center align items vertically */
-    flex-wrap: wrap; /* Allow items to wrap to the next line if needed */
+    
   }
   
   .navbar-link {

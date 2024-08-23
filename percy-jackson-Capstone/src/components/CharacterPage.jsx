@@ -1,13 +1,14 @@
-import React from 'react'
-import CharacterCarousel from './CharacterCarousel'
+import React from "react";
+import CharacterCarousel from "./CharacterCarousel";
 
-const CharacterPage=()=> {
+const CharacterPage = ({ characters }) => {
+  console.log("Character Page", characters);
   return (
-    <div className='character-page'>
+    <div className="character-page">
       <h1>Character Carousel</h1>
-      <CharacterCarousel />
-      </div>
-  )
-}
+      <CharacterCarousel characters={characters} />
+    </div>
+  );
+};
 
-export default CharacterPage
+export default CharacterPage;

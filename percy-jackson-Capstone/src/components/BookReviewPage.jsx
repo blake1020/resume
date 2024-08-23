@@ -135,7 +135,7 @@ function BookReviewPage() {
   if (!selectedBook) {
     return (
       <div>
-        //add dropdown component
+        {/* add dropdown component */}
         <DropDown
           bookList={bookList}
           selectedBook={selectedBook}
@@ -144,25 +144,14 @@ function BookReviewPage() {
         {/* <div style={{marginTop: "50px"}}> */}
         {!selectedBook ? (
           <div>
-            <h1>Book Reviews</h1>
+            <h1>Select a Book to review</h1>
+            {/*maybe import carousel when working for opening book reviews */}
           </div>
         ) : (
-          <div>select a book to review</div>
+          <div>
+            <h1>fix it</h1>
+          </div>
         )}
-        {/*<label htmlFor="bookSelect">Select a Book: </label>
-        <select
-          id="bookSelect"
-          value={selectedBook}
-          onChange={handleBookChange}
-
-        >
-          <option value="">Select a book</option>
-          {bookList.map((book) => (
-            <option key={book.id} value={book.id}>
-              {book.title}
-            </option>
-          ))}
-        </select> */}
       </div>
     );
   }
@@ -179,7 +168,6 @@ function BookReviewPage() {
         onBookChange={handleBookChange}
       />
       <div style={{ marginTop: "60px" }}>
-        {" "}
         {/* Adjust margin to ensure dropdown doesn't overlap */}
         {!selectedBook ? (
           <div>

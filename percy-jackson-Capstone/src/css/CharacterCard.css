@@ -27,11 +27,12 @@
   }
   
   .card-front {
-    background: #fff;
+    background: #F4A300;
     display: flex;
+    color: #6C757D;
     align-items: center;
     justify-content: center;
-    border: 1px solid #ddd;
+    border: 3px solid black;
   }
   
   .card-back {

@@ -8,6 +8,7 @@ import MythicalCreaturePage from "./components/MythicalCreaturePage";
 import HomePage from "./components/HomePage";
 import CharacterCarousel from "./components/CharacterCarousel";
 import axios from "axios";
+// import "../src/css/App.css";
 //import book covers
 
 const bookList = [
@@ -18,7 +19,8 @@ const bookList = [
 
 function App() {
   const [selectedBook, setSelectedBook] = useState("");
-  const [character, setCharacters] = useState(null);
+  const [characters, setCharacters] = useState([]);
+  const [mythicalCreatures, setMythicalCreatures] = useState([]);
   const [selectedReviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -28,26 +30,47 @@ function App() {
   };
 
   useEffect(() => {
+    const fecthMythicalCretures = async () => {
+      const res = await axios.get("http://localhost:3002/mythicals");
+    };
+  });
+  useEffect(() => {
     console.log(selectedBook);
   }, [selectedBook]);
 
-  // useEffect(() => {
-  //   fetchCharacters()
-  // }, [])
-  const fetchCharacters = async () => {
-    //fetch reviews
-    const res = await axios.get("http://localhost:3002/characters");
-    //set to state
-    console.log(res);
-  };
+  useEffect(() => {
+    const fetchCharacters = async () => {
+      //fetch reviews
+      try {
+        const res = await axios.get("http://localhost:3002/characters");
 
+        setCharacters(res.data);
+
+        console.log("fetched characters:", res.data);
+      } catch (error) {
+        console.error("Error getting character data");
+      } //set to state
+    };
+    fetchCharacters();
+  }, []);
+
+  console.log("Characters in App", characters);
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
   return (
     <div>
       <Router>
         <Navbar selectedBook={selectedBook} onBookChange={handleBookChange} />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/characters" element={<CharacterPage />} />
+          <Route
+            path="/characters"
+            element={<CharacterPage characters={characters} />}
+          />
           <Route
             path="/bookReviews"
             element={<BookReviewPage selectedBook={selectedBook} />}
