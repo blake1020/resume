@@ -8,7 +8,8 @@ import MythicalCreaturePage from "./components/MythicalCreaturePage";
 import HomePage from "./components/HomePage";
 import CharacterCarousel from "./components/CharacterCarousel";
 import axios from "axios";
-// import "../src/css/App.css";
+import "../src/css/App.css";
+
 //import book covers
 
 const bookList = [
@@ -29,6 +30,7 @@ function App() {
     setSelectedBook(event.target.value);
   };
 
+  //grab mythical creatures
   useEffect(() => {
     const fecthMythicalCretures = async () => {
       const res = await axios.get("http://localhost:3002/mythicals");
@@ -38,6 +40,7 @@ function App() {
     console.log(selectedBook);
   }, [selectedBook]);
 
+  //grab characters from database
   useEffect(() => {
     const fetchCharacters = async () => {
       //fetch reviews
@@ -62,7 +65,7 @@ function App() {
     return <div>Error: {error}</div>;
   }
   return (
-    <div>
+    <div className="app-container">
       <Router>
         <Navbar selectedBook={selectedBook} onBookChange={handleBookChange} />
         <Routes>

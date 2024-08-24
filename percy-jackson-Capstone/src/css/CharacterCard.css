@@ -27,16 +27,17 @@
   }
   
   .card-front {
+    color: black;
     background: #F4A300;
     display: flex;
-    color: #6C757D;
     align-items: center;
     justify-content: center;
     border: 3px solid black;
   }
   
   .card-back {
-    background: #eee;
+    color: black;
+    background: #2E8B57;
     display: flex;
     align-items: center;
     justify-content: center;

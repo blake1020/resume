@@ -145,7 +145,7 @@ function BookReviewPage() {
         {!selectedBook ? (
           <div>
             <h1>Select a Book to review</h1>
-            {/*maybe import carousel when working for opening book reviews */}
+            {/*maybe import carousel when working for opening book reviews or random cover */}
           </div>
         ) : (
           <div>
@@ -168,7 +168,6 @@ function BookReviewPage() {
         onBookChange={handleBookChange}
       />
       <div style={{ marginTop: "60px" }}>
-        {/* Adjust margin to ensure dropdown doesn't overlap */}
         {!selectedBook ? (
           <div>
             <h1>Book Reviews</h1>
